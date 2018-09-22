@@ -1,13 +1,13 @@
 #pragma once
 
 typedef struct {
-	unsigned char r, g, b;
+    unsigned char r, g, b;
 } Color;
 
 typedef struct {
-	unsigned int w, h;
-	unsigned int range;
-	Color** colors;
+    unsigned int w, h;
+    unsigned int range;
+    Color** colors;
 } Image;
 
 Image* CreateImage(const int w, const int h, const int range);
