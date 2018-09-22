@@ -104,4 +104,6 @@ void WriteToFile(const Image *pic, const char* fileName)
         fprintf(fp, "\n");
     }
     fclose(fp);
+
+    printf("Wrote to file: %s\n", fileNameExt);
 }
