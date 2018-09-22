@@ -4,14 +4,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-Image* CreateImage(const int w, const int h, const int range)
+Image* CreateImage(const int w, const int h, const int maxValue)
 {
     Image* pic = (Image*) malloc(sizeof(Image));
     
     // Set properties
     pic->w = w;
     pic->h = h;
-    pic->range = range;
+    pic->maxValue = maxValue;
 
     // Allocate pixels for a 'w x h' image
     // pixels[y][x]
@@ -22,6 +22,8 @@ Image* CreateImage(const int w, const int h, const int range)
         printf("ERROR: malloc failed!\n");
         exit(1);
     }
+
+    Color defaultColor = { maxValue, maxValue, maxValue };
 
     for (int y = 0; y < h; y++)
     {
@@ -35,7 +37,7 @@ Image* CreateImage(const int w, const int h, const int range)
 
         // Set default color
         for (int x = 0; x < w; x++)
-            pic->colors[y][x] = (Color) { 255, 255, 255 };
+            pic->colors[y][x] = defaultColor;
     }
 
     return pic;
@@ -87,7 +89,7 @@ void WriteToFile(const Image *pic, const char* fileName)
 
     fprintf(fp, "P3\n");
     fprintf(fp, "%d %d\n", pic->w, pic->h);
-    fprintf(fp, "%d\n", pic->range);
+    fprintf(fp, "%d\n", pic->maxValue);
 
     for (int y = 0; y < pic->h; y++)
     {

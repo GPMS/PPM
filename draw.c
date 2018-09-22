@@ -4,13 +4,13 @@
 
 int CheckRange(const Image* pic, const Color* color)
 {
-    if (color->r <= 0 || color->r >= pic->range)
+    if (color->r <= 0 || color->r >= pic->maxValue)
         return 1;
 
-    if (color->g <= 0 || color->g >= pic->range)
+    if (color->g <= 0 || color->g >= pic->maxValue)
         return 1;
 
-    if (color->b <= 0 || color->b >= pic->range)
+    if (color->b <= 0 || color->b >= pic->maxValue)
         return 1;
 
     return 0;
@@ -34,8 +34,6 @@ int ClearImage(Image* pic, const Color* clearColor)
 
 void SetPixel(Image *pic, unsigned int x, unsigned int y, const Color *color)
 {
-    unsigned int range = pic->range;
-
     if (!CheckRange(pic, color))
     {
         printf("ERROR: couldn't set color of pixel(%d,%d) to (%d, %d, %d)!\n",
